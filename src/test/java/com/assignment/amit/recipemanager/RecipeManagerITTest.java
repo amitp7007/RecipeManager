@@ -2,31 +2,45 @@ package com.assignment.amit.recipemanager;
 
 import com.assignment.amit.recipemanager.model.Ingredient;
 import com.assignment.amit.recipemanager.model.Recipe;
+import com.assignment.amit.recipemanager.testsupport.TestMongoConfiguration;
 import com.assignment.amit.recipemanager.testsupport.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.*;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = RecipeManagerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class RecipeManagerIT {
+@ActiveProfiles("integration")
+@Import(TestMongoConfiguration.class)
+public class RecipeManagerITTest {
     @LocalServerPort
     private int port;
+    @Autowired
+    private MongoTemplate mongoTemplate;
     String createUrl(String path){
         return  "http://localhost:"+ port + path;
     }
 
+    @AfterEach
+    public void cleanup(){
+        mongoTemplate.dropCollection(ResponseEntity.class);
+    }
     @Test
     public void testGetRecipe() throws JSONException {
         HttpHeaders headers = new HttpHeaders();

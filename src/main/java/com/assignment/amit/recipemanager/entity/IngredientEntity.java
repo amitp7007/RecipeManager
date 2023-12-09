@@ -1,13 +1,14 @@
 package com.assignment.amit.recipemanager.entity;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@RequiredArgsConstructor
-@Getter
-@Document
+@Data
+@AllArgsConstructor
 public class IngredientEntity {
-	private final String name;
-	private final int quantity;
+	private String name;
+	private int quantity;
 }

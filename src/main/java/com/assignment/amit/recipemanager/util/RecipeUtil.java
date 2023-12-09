@@ -10,17 +10,12 @@ import java.util.List;
 public class RecipeUtil {
     public static RecipeEntity mapToRecipeEntity(Recipe recipe) {
         List<IngredientEntity> ingredientEntities = mapToIngredientsEntity(recipe.ingredients());
-        RecipeEntity entity = new RecipeEntity(recipe.id(), recipe.name(), recipe.servings(),
+        return new RecipeEntity( null, recipe.recipeName(), recipe.servings(),
                 ingredientEntities, recipe.instructions(), recipe.isVegetarian());
-        return entity;
-
-    }
+       }
 
     public static List<IngredientEntity> mapToIngredientsEntity(List<Ingredient> ingredients) {
-        return ingredients.stream().map(ingredient -> {
-            return new IngredientEntity(ingredient.name(), ingredient.quantity());
-        }).toList();
-
+        return ingredients.stream().map(ingredient -> new IngredientEntity(ingredient.name(), ingredient.quantity())).toList();
     }
 
     public static List<Ingredient> mapToIngredients(List<IngredientEntity> ingredientEntities) {
@@ -30,7 +25,7 @@ public class RecipeUtil {
     }
 
     public static Recipe maoToRecipe(RecipeEntity entity) {
-        return new Recipe(entity.getId(), entity.getRecipeName(),
+        return new Recipe(entity.getRecipeName(),
                 mapToIngredients(entity.getIngredients()), entity.getServings(),
                 entity.getInstructions(), entity.getIsVegetarian());
     }

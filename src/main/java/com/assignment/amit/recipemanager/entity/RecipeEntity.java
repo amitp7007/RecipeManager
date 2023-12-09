@@ -1,19 +1,26 @@
 package com.assignment.amit.recipemanager.entity;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Set;
 
-@RequiredArgsConstructor
+
 @Document
-@Getter
+@AllArgsConstructor
+@Data
 public class RecipeEntity {
-	final String id;
-	final String recipeName;
-	final int servings;
-	final List<IngredientEntity> ingredients;
-	final String instructions;
-	final String isVegetarian;
+	@Id
+	private String id;
+	@Indexed(unique = true)
+	private String recipeName;
+	private int servings;
+	private List<IngredientEntity> ingredients;
+	private String instructions;
+	private String isVegetarian;
+	//private String createdBy;
+
 }

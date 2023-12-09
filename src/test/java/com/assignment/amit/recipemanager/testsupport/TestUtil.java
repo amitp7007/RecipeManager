@@ -47,7 +47,7 @@ public class TestUtil {
                 return new TestRecipeBuilder();
             }
             public Recipe build() {
-                return new Recipe(this.id, this.name,
+                return new Recipe(this.name,
                         this.ingredients, this.servings,
                         this.instructions, this.isVegeterian);
             }
