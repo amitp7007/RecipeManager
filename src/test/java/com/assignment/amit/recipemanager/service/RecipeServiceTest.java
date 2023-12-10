@@ -27,10 +27,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class RecipeServiceTest {
-
     @Mock
     MongoTemplate mongoTemplate;
-
     @Test
     public void shouldAddRecipeInDB() {
         List<Ingredient> ingredient = List.of(TestUtil.TestIngredientBuilder.newBuilder().withName("Coriander").withQuantity(2).build());

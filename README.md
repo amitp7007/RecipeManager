@@ -12,6 +12,12 @@ This Recipe Manager application allow user to manage thier recipes. User can cre
 3. MongoDb
 
 ## Apis Exposed 
+### Swagger Url:
+   -   
+   ```
+   http://localhost:8080/swagger-ui/index.htm
+   
+   ```
 1. Create Recipe:
    ```        
     curl --location 'localhost:8080/recipes' \
@@ -61,8 +67,12 @@ This Recipe Manager application allow user to manage thier recipes. User can cre
    ```
     mvn clean install
    ```
+## Build Docker image
+   ```
+   docker build -t recipemanager:0.0.1 .
+   ```
 ## Run Application
    Go to the project directory
    ```
-    java -jar target/recipemanager-0.0.1-SNAPSHOT.jar
+    docker run -p 8082:8080 -e MONGODB_HOST=host.docker.internal -e PORT=27018  recipemanager:0.0.1
    ```
