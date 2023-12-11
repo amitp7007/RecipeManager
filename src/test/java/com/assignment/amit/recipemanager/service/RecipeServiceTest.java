@@ -4,7 +4,6 @@ import com.assignment.amit.recipemanager.entity.RecipeEntity;
 import com.assignment.amit.recipemanager.exceptions.RecipeNotFoundException;
 import com.assignment.amit.recipemanager.model.Ingredient;
 import com.assignment.amit.recipemanager.model.Recipe;
-import com.assignment.amit.recipemanager.repository.RecipeRepository;
 import com.assignment.amit.recipemanager.testsupport.TestUtil;
 import com.assignment.amit.recipemanager.util.RecipeUtil;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +16,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

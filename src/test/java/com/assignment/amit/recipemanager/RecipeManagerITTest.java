@@ -299,7 +299,7 @@ public class RecipeManagerITTest {
                 HttpMethod.POST, entity, String.class);
 
         //then
-        Assertions.assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode());
+        Assertions.assertEquals(HttpStatusCode.valueOf(201), response.getStatusCode());
     }
 
     @Test

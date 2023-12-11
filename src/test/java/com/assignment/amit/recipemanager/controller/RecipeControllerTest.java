@@ -35,9 +35,11 @@ public class RecipeControllerTest {
         Recipe recipe = TestUtil.TestRecipeBuilder.newBuilder().withId("1").withName("PaneerLababdar").withIngredients(ingredient)
                 .withServing(5).withInstructions("Start with frying the paneer").build();
         when(recipeService.addRecipe(any())).thenReturn(recipe);
-        Recipe storedRecipe = new RecipeController(recipeService).addRecipe(recipe);
+        ResponseEntity<Recipe> storedRecipeResponse = new RecipeController(recipeService).addRecipe(recipe);
         verify(recipeService, times(1)).addRecipe(any());
-        assertEquals(storedRecipe.recipeName(), recipe.recipeName());
+
+        assertEquals(HttpStatus.CREATED, storedRecipeResponse.getStatusCode());
+        assertEquals(recipe.recipeName(), Objects.requireNonNull(storedRecipeResponse.getBody()).recipeName());
 
     }
 
